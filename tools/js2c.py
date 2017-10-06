@@ -1,4 +1,16 @@
-#!/usr/bin/env python
+#!/bin/sh
+
+# Locate python2 interpreter and re-execute the script.  Note that the
+# mix of single and double quotes is intentional, as is the fact that
+# the ] goes on a new line.
+_=[ 'exec' '/bin/sh' '-c' '''
+which python2.7 >/dev/null && exec python2.7 "$0" "$@"
+which python2 >/dev/null && exec python2 "$0" "$@"
+exec python "$0" "$@"
+''' "$0" "$@"
+]
+del _
+
 #
 # Copyright 2006-2008 the V8 project authors. All rights reserved.
 # Redistribution and use in source and binary forms, with or without
